@@ -1,24 +1,39 @@
-### SC-DBSCAN
+# SC-DBSCAN: a schema extraction algorithm for large RDF datasets
+SC-DBSCAN is a scalable density-based clustering algorithm that operates on entities in large RDF datasets.
+SC-DBSCAN builds a schema describing the entities of a dataset by discovering their classes.
+SC-DBSCAN is designed to address the scalability issue of density based clustering algorithms.
+It can cluster large RDF datasets and provides a clustering result of a quality as good as the original [DBSCAN](https://en.wikipedia.org/wiki/DBSCAN) algorithm.
 
-We propose SC-DBSCAN, a scalable density-based clustering algorithm that operates on entities in large RDF datasets, in order to  construct a schema describing the dataset by discovering the classes of the entities. 
-The main goal of SC-DBSCAN is the scalability together with efficiency, where it is designer to cluster very large RDF dataset and provide a clustering result of a quality as good as the original DBSCAN.
+SC-DBSCAN is implemented in [Scala](https://www.scala-lang.org/) and using the [Apache Spark](https://spark.apache.org/) framework.
 
-### How to Build
-mvn install
+## Building the project
+[Maven](https://maven.apache.org/) is used to build the project.
+Due to some constraints imposed by the Scala compiler, a [JDK 8](https://adoptopenjdk.net/) is needed.
 
-### How to Run
-The main class is: "david/sc_dbscan/Main.scala".
+```
+export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/
+mvn package -DskipTests
+```
 
+## Running the algorithm
+The main class is `david/sc_dbscan/Main.scala`.
 
-
-spark-submit --class david.sc_dbscan.Main target/sc_dbscan-0.0.1-SNAPSHOT-jar-with-dependencies.jar --eps X.X --coef X:Boolean --cap XXXX  --mpts X DataSets:String
+```
+spark-submit --class david.sc_dbscan.Main \\
+             target/sc_dbscan-0.0.1-SNAPSHOT-jar-with-dependencies.jar \\
+             --eps X.X --coef Y --cap C  --mpts Y dataset
 
 WHERE:
---eps 	:	epsilone value
---coef 	: 	Boolean that define whether it clusters patterns or entities
---cap 	:	the capacity of a single node
---mpts 	:	minPts value
-DataSet :	path to the dataset
+  --eps 	: the similarity threshold epsilon (between 0 and 1)
+  --coef 	: a boolean that defines whether it clusters patterns or entities
+  --cap 	: the maximum capacity of a computing node (in number of entities)
+  --mpts 	: the density thresholg minPts
+  dataset   : the path to the dataset
+```
 
-Example:
-spark-submit --class david.sc_dbscan.Main target/sc_dbscan-0.0.1-SNAPSHOT-jar-with-dependencies.jar --eps 0.8 --coef false --cap 2000  --mpts 3 /DataSets/T2800L10N10000
+For Example
+```
+spark-submit --class david.sc_dbscan.Main \\
+             target/sc_dbscan-0.0.1-SNAPSHOT-jar-with-dependencies.jar \\
+             --eps 0.8 --coef false --cap 2000  --mpts 3 DataSets/T2800L10N10000
+```
