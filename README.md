@@ -8,11 +8,19 @@ SC-DBSCAN is implemented in [Scala](https://www.scala-lang.org/) and using the [
 
 ## Building the project
 [Maven](https://maven.apache.org/) is used to build the project.
+The [Maven wrapper](https://github.com/takari/maven-wrapper) tool allows to build the project without a local maven install.
 Due to some constraints imposed by the Scala compiler, a [JDK 8](https://adoptopenjdk.net/) is needed.
 
+On Linux
 ```
 export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/
-mvn package -DskipTests
+./mvnw package -DskipTests
+```
+
+On Windows
+```
+set JAVA_HOME=C:\path\to\jdk8
+mvnw.cmd package -DskipTests
 ```
 
 ## Running the algorithm
