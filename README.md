@@ -28,7 +28,7 @@ The main class is `david/sc_dbscan/Main.scala`.
 
 ```
 spark-submit --class david.sc_dbscan.Main \\
-             target/sc_dbscan-0.0.1-SNAPSHOT-jar-with-dependencies.jar \\
+             target/sc_dbscan-1.0-jar-with-dependencies.jar \\
              --eps X.X --coef Y --cap C  --mpts Y dataset
 
 WHERE:
@@ -42,6 +42,6 @@ WHERE:
 For Example
 ```
 spark-submit --class david.sc_dbscan.Main \\
-             target/sc_dbscan-0.0.1-SNAPSHOT-jar-with-dependencies.jar \\
+             target/sc_dbscan-1.0-jar-with-dependencies.jar \\
              --eps 0.8 --coef false --cap 2000  --mpts 3 DataSets/T2800L10N10000
 ```
